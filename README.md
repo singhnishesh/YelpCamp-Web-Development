@@ -3,12 +3,6 @@
 
 https://murmuring-thicket-84728.herokuapp.com/
 
-<a href="https://murmuring-thicket-84728.herokuapp.com/">
- <p align="center">
-  <img src="https://i.imgur.com/F6IiDsR.png?w="350" alt="Campground"
- </p>
-</a>
-
 YelpCamp is a website where users can create and review campgrounds. In order to review or create a campground, you must have an account. This project was part of Colt Steele's web dev course on udemy.  
 
 This project was created using Node.js, Express, MongoDB, and Bootstrap. Passport.js was used to handle authentication.  
@@ -21,8 +15,8 @@ This project was created using Node.js, Express, MongoDB, and Bootstrap. Passpor
 * Sort campgrounds by highest rating, most reviewed, lowest price, or highest price
 
 ## Run it locally
-1. Install [mongodb](https://www.mongodb.com/)
-2. Create a cloudinary account to get an API key and secret code
+1. Install [mongodb](https://www.mongodb.com/).
+2. Create a cloudinary account to get an API key and secret code.
 
 ```
 git clone https://github.com/leovenom/YelpCamp.git
@@ -42,7 +36,7 @@ Create a .env file (or just export manually in the terminal) in the root of the 
 
 ```
 DATABASEURL='<url>'
-API_KEY=''<key>
+API_KEY='<key>'
 API_SECRET='<secret>'
 ```
 
