@@ -1,47 +1,52 @@
-
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+   
+const { string } = require('joi');
+const mongoose = require('mongoose');
 const Review = require('./review')
+const Schema = mongoose.Schema;
 
-const ImageSchema = new Schema({
+const  imagesSchema  = new Schema({
     url: String,
     filename: String
 });
 
+const opts = { toJSON: { virtuals: true} };
 
-const opts = { toJSON: { virtuals: true } };
-
-const CampGroundSchema = new Schema({
+const CampgroundSchema = new Schema({
     title: String,
-    images: [ImageSchema],
+    images: [imagesSchema],
     geometry: {
         type: {
             type: String,
             enum: ['Point'],
-            required: true
+            require: true
         },
         coordinates: {
             type: [Number],
-            required: true
+            require: true
         }
     },
     price: Number,
-    location: String,
     description: String,
-    author:{
-        type:Schema.Types.ObjectId, 
-        ref:'User'
-    }, 
-    reviews:[
+    location: String,
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    reviews: [
         {
             type: Schema.Types.ObjectId,
             ref: 'Review'
         }
     ]
-},opts);
+}, opts);
 
-CampGroundSchema.post('findOneAndDelete', async function (doc) {
-    if (doc) {
+CampgroundSchema.virtual('properties.popUpMarkup').get(function(){
+    return `<b>${this.title}</b> <p>${this.location}</p>`;
+    
+ });
+
+CampgroundSchema.post('findOneAndDelete', async function (doc) {
+    if (doc){
         await Review.deleteMany({
             _id: {
                 $in: doc.reviews
@@ -50,4 +55,13 @@ CampGroundSchema.post('findOneAndDelete', async function (doc) {
     }
 })
 
-module.exports = mongoose.model('Campground', CampGroundSchema);
+module.exports = mongoose.model('Campground', CampgroundSchema);
+
+
+
+
+
+
+
+
+
